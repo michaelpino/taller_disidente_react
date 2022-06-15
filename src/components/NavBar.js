@@ -1,4 +1,5 @@
 import logo from '../img/logo.jpg';
+import cart from '../img/shopping-cart.png';
 
 export default function NavBar() {
     return (
@@ -17,6 +18,7 @@ export default function NavBar() {
                 <li className="box-border p-2 hover:font-bold hover:text-sky-500"><a href="http://www.google.cl" >Nosotros</a></li>
                 <li className="box-border p-2 hover:font-bold hover:text-sky-500"><a href="http://www.google.cl" >Tienda en linea</a></li>
                 <li className="box-border p-2 hover:font-bold hover:text-sky-500"><a href="http://www.google.cl" >Contáctanos</a></li>
+                <li className="box-border p-2 hover:font-bold"><a href="http://www.google.cl" ><img className="max-h-8 hover:scale-125 " src={cart}/></a></li>
             </ul>
         </div>
     </navbar>
