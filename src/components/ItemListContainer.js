@@ -1,8 +1,14 @@
+import ItemCount from './ItemCount';
 
 export default function ItemListContainer( {mensaje} ) {
+    
+    const onAdd = ( unidadesAlCarrito ) => {
+        console.log("Se han agregado " + unidadesAlCarrito + " unidades del producto al carrito!");
+    };
+    
     return (
-        <div className=" font-medium">
-            <p className=' hover:text-sky-500' > {mensaje} </p>
+        <div>
+            <ItemCount stock={5} initial={1} onAdd={onAdd}/>
         </div>
     );
 }
