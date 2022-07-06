@@ -30,8 +30,7 @@ export default function ItemListContainer( {mensaje} ) {
     return (
         <div>
             <ItemCount stock={5} initial={1} onAdd={onAdd}/>
-            <HashLoader color={"#2cbbe8"} loading={loading} cssOverride={override} size={150} />
-            <ItemList productos={productos}/>
+            {loading ? <HashLoader color={"#2cbbe8"} loading={loading} cssOverride={override} size={150} /> : <ItemList productos={productos}/>}
         </div>
     );
 }
