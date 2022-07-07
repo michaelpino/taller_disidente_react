@@ -4,7 +4,7 @@ import logo from '../img/logo.jpg';
 
 export default function NavBar() {
     return (
-    <navbar className="flex justify-around items-center"> 
+    <nav className="flex justify-around items-center"> 
         <div className='inline-flex items-center'>
             <img className="max-h-20 " src={logo} />
             <div className="block">
@@ -22,6 +22,6 @@ export default function NavBar() {
                 <li><CartWidget /></li>
             </ul>
         </div>
-    </navbar>
+    </nav>
     );
   }

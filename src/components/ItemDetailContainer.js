@@ -8,7 +8,7 @@ const override = {
     borderColor: "red",
   };
 
-export default function ItemDetailContainer( {mensaje} ) {
+export default function ItemDetailContainer( ) {
     
     const [producto, setProducto ] = useState([]);
     const [loading, setLoading] = useState(true);
