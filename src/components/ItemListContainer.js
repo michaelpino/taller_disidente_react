@@ -1,6 +1,7 @@
 import ItemCount from './ItemCount';
 import React, { useState, useEffect } from "react";
 import ItemList from './ItemList';
+import { useParams } from 'react-router-dom';
 import HashLoader from "react-spinners/HashLoader";
 
 const override = {
@@ -11,17 +12,21 @@ const override = {
 
 export default function ItemListContainer( {mensaje} ) {
     
+    const {categoryName} = useParams();
+    
     const [productos, setProductos ] = useState([]);
     const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
+        const url = categoryName ? `https://fakestoreapi.com/products/category/${categoryName}` : 'https://fakestoreapi.com/products';
         setTimeout( () => {
-            fetch('https://fakestoreapi.com/products?limit=10')
+            fetch(url)
             .then(res=>res.json())
             .then(data=> setProductos(data))
             .finally(() => setLoading(!loading))
         },2000);
-    },[])
+    },[categoryName])
     
     const onAdd = ( unidadesAlCarrito ) => {
         console.log("Se han agregado " + unidadesAlCarrito + " unidades del producto al carrito!");

@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+
 export default function ItemDetail({ id, title, price, pictureUrl, description, category }) {
     return (
             <div key={id} className="flex justify-center">
               <div className="rounded-lg shadow-lg bg-white max-w-sm">
                 <span className="inline-block py-1 px-2 rounded bg-indigo-50 text-blue-600 text-xl font-medium tracking-widest">{category}</span>
-                <a href={pictureUrl} data-mdb-ripple="true" data-mdb-ripple-color="light">
+                <Link to={pictureUrl} data-mdb-ripple="true" data-mdb-ripple-color="light">
                   <img className="rounded-t-lg" src={pictureUrl} alt={title}/>
-                </a>
+                </Link>
                 <div className="p-6">
                   <h5 className="text-gray-900 text-xl font-medium mb-2">{title}</h5>
                   <p className="text-gray-700 text-base mb-4">

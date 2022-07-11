@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ItemDetail from './ItemDetail';
+import { useParams } from 'react-router-dom';
 import SyncLoader  from "react-spinners/SyncLoader";
 
 const override = {
@@ -10,12 +11,13 @@ const override = {
 
 export default function ItemDetailContainer( ) {
     
+    const {id} = useParams();
     const [producto, setProducto ] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setTimeout( () => {
-            fetch('https://fakestoreapi.com/products/18')
+            fetch(`https://fakestoreapi.com/products/${id}`)
             .then(res=>res.json())
             .then(data=> setProducto(data))
             .finally(() => setLoading(!loading))
