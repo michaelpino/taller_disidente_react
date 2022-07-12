@@ -12,7 +12,7 @@ export default function NavBar() {
             fetch('https://fakestoreapi.com/products/categories')
             .then(res=>res.json())
             .then(data=> setCategorias(data))
-        },[categorias])
+        },[])
     
     return (
     <nav className="flex justify-around items-center"> 
@@ -35,7 +35,7 @@ export default function NavBar() {
                 <li><CartWidget /></li>
             </ul> */}
             <ul className="justify-around inline-flex list-none font-medium text-decoration-style: solid">
-                {categorias.map( (categoria) => <li key={categoria} className="box-border p-2 hover:font-bold hover:text-sky-500"><Link to={`category/${categoria}`} >{categoria}</Link></li>)}
+                {categorias.map( (categoria, i) => <li key={i} className="box-border p-2 hover:font-bold hover:text-sky-500"><Link to={`category/${categoria}`} >{categoria}</Link></li>)}
                 <li><CartWidget /></li>
             </ul>
         </div>

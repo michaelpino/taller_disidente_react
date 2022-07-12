@@ -5,7 +5,7 @@ export default function ItemDetail({ id, title, price, pictureUrl, description, 
             <div key={id} className="flex justify-center">
               <div className="rounded-lg shadow-lg bg-white max-w-sm">
                 <span className="inline-block py-1 px-2 rounded bg-indigo-50 text-blue-600 text-xl font-medium tracking-widest">{category}</span>
-                <Link to={pictureUrl} data-mdb-ripple="true" data-mdb-ripple-color="light">
+                <Link to={`/item/${id}`} data-mdb-ripple="true" data-mdb-ripple-color="light">
                   <img className="rounded-t-lg" src={pictureUrl} alt={title}/>
                 </Link>
                 <div className="p-6">

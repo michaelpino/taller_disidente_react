@@ -19,12 +19,13 @@ export default function ItemListContainer( {mensaje} ) {
     
 
     useEffect(() => {
+        setLoading(true);
         const url = categoryName ? `https://fakestoreapi.com/products/category/${categoryName}` : 'https://fakestoreapi.com/products';
         setTimeout( () => {
             fetch(url)
             .then(res=>res.json())
             .then(data=> setProductos(data))
-            .finally(() => setLoading(!loading))
+            .finally(() => setLoading(false))
         },2000);
     },[categoryName])
     
@@ -34,7 +35,7 @@ export default function ItemListContainer( {mensaje} ) {
     
     return (
         <div>
-            <ItemCount stock={5} initial={1} onAdd={onAdd}/>
+            {/* <ItemCount stock={5} initial={1} onAdd={onAdd}/> */}
             {loading ? <HashLoader color={"#2cbbe8"} loading={loading} cssOverride={override} size={150} /> : <ItemList productos={productos}/>}
         </div>
     );

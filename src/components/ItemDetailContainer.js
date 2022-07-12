@@ -16,11 +16,12 @@ export default function ItemDetailContainer( ) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         setTimeout( () => {
             fetch(`https://fakestoreapi.com/products/${id}`)
             .then(res=>res.json())
             .then(data=> setProducto(data))
-            .finally(() => setLoading(!loading))
+            .finally(() => setLoading(false))
         },2000);
     },[])
     
