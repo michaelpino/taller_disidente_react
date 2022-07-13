@@ -1,4 +1,3 @@
-import ItemCount from './ItemCount';
 import React, { useState, useEffect } from "react";
 import ItemList from './ItemList';
 import { useParams } from 'react-router-dom';
@@ -29,13 +28,8 @@ export default function ItemListContainer( {mensaje} ) {
         },2000);
     },[categoryName])
     
-    const onAdd = ( unidadesAlCarrito ) => {
-        console.log("Se han agregado " + unidadesAlCarrito + " unidades del producto al carrito!");
-    };
-    
     return (
         <div>
-            {/* <ItemCount stock={5} initial={1} onAdd={onAdd}/> */}
             {loading ? <HashLoader color={"#2cbbe8"} loading={loading} cssOverride={override} size={150} /> : <ItemList productos={productos}/>}
         </div>
     );

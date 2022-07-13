@@ -1,7 +1,7 @@
 import CartWidget from './CartWidget';
 import logo from '../img/logo.jpg';
 import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function NavBar() {
@@ -26,14 +26,6 @@ export default function NavBar() {
         
         <div>
             
-            {//DEJARÉ ESTO COMENTADO SOLO PORQUE SON LAS CATEGORÍAS QUE ME GUSTARÍA DEJAR A FUTURO EN MI PROYECTO REAL
-            /* <ul className="justify-around inline-flex list-none font-medium text-decoration-style: solid">
-                <li className="box-border p-2 hover:font-bold hover:text-sky-500"><a href="http://www.google.cl" >Inicio</a></li>
-                <li className="box-border p-2 hover:font-bold hover:text-sky-500"><a href="http://www.google.cl" >Nosotros</a></li>
-                <li className="box-border p-2 hover:font-bold hover:text-sky-500"><a href="http://www.google.cl" >Tienda en linea</a></li>
-                <li className="box-border p-2 hover:font-bold hover:text-sky-500"><a href="http://www.google.cl" >Contáctanos</a></li>
-                <li><CartWidget /></li>
-            </ul> */}
             <ul className="justify-around inline-flex list-none font-medium text-decoration-style: solid">
                 {categorias.map( (categoria, i) => <li key={i} className="box-border p-2 hover:font-bold hover:text-sky-500"><Link to={`category/${categoria}`} >{categoria}</Link></li>)}
                 <li><CartWidget /></li>
