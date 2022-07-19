@@ -27,7 +27,7 @@ export default function ItemDetailContainer( ) {
     
     return (
         <div className="grid justify-center">
-            {loading ? <SyncLoader color={"#2cbbe8"} loading={loading} cssOverride={override} size={80} /> : <ItemDetail id={producto.id} title={producto.title} price={producto.price} pictureUrl={producto.image} description={producto.description} category={producto.category}/> }
+            {loading ? <SyncLoader color={"#2cbbe8"} loading={loading} cssOverride={override} size={80} /> : <ItemDetail producto={producto}/> }
         </div>
     );
 }
