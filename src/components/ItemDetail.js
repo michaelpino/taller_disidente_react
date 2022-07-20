@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import React, { useState, useContext } from "react";
 import ItemCount from "./ItemCount";
-import { contexto } from "../context/CartContext";
+import { cartContext } from "../context/CartContext";
 
 export default function ItemDetail({ producto }) {
    
   const [itemCountVisible, setItemCountVisible] = useState(true);
   const [unidadesAgregadas, setUnidadesAgregadas] = useState(0);
-  const { addItem } = useContext(contexto);
+  const { addItem } = useContext(cartContext);
 
   //Dejo aqui esta variable pq a futuro imagino la obtendré desde una base de datos
   const stockInicial = 5;

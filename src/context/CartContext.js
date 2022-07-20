@@ -1,11 +1,16 @@
-import React, {createContext, useState} from "react";
+import React, {createContext, useState, useEffect} from "react";
 
-export const contexto = createContext();
-const { Provider } = contexto;
+export const cartContext = createContext();
+const { Provider } = cartContext;
 
 export default function  CartContext({ children }) {
 
     const [productosCart, setProductosCart] = useState([]);
+    const [totalProductosCart, setTotalProductosCart] = useState(0);
+
+    useEffect(() => {
+        countItems();
+    },[productosCart])
 
     function addItem (item, quantity) {
         if(isInCart(item.id)){
@@ -50,9 +55,18 @@ export default function  CartContext({ children }) {
         return respuesta;
     };
 
+    function countItems () {
+        let cantidadItems = 0;
+        productosCart.forEach((producto) => {
+            cantidadItems += producto.qty;
+        })
+        console.log("El total de productos ahora es " + cantidadItems);
+        setTotalProductosCart(cantidadItems);
+    };
+
     
     return (
-        <Provider value={{productosCart, addItem, removeItem, clear}}>
+        <Provider value={{productosCart, addItem, removeItem, clear, totalProductosCart}}>
             {children}
         </Provider>       
         );
