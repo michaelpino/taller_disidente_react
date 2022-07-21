@@ -7,9 +7,11 @@ export default function  CartContext({ children }) {
 
     const [productosCart, setProductosCart] = useState([]);
     const [totalProductosCart, setTotalProductosCart] = useState(0);
+    const [montoTotalCart, setMontoTotalCart] = useState(0);
 
     useEffect(() => {
         countItems();
+        montoTotalItems();
     },[productosCart])
 
     function addItem (item, quantity) {
@@ -20,27 +22,21 @@ export default function  CartContext({ children }) {
                 }
                 return producto;
             });
-            console.log("El nuevo carrito es:");
-            console.log(newCart);
             setProductosCart(newCart);
         }
         else {
             const newItem = {...item, qty: quantity};
             setProductosCart(productosCart => [...productosCart,newItem]);
         }
-        
-        
-        
         console.log(productosCart);
     };
 
     function removeItem (itemId) {
         const newCart = productosCart.filter((producto) => producto.id !== itemId)
-        console.log(newCart);
-        console.log("id=" + itemId + " fue borrado");
+        setProductosCart(newCart);
     };
 
-    function clear () {
+    function clearCart () {
         setProductosCart([]);
         console.log("borrado todo");
     };
@@ -60,13 +56,20 @@ export default function  CartContext({ children }) {
         productosCart.forEach((producto) => {
             cantidadItems += producto.qty;
         })
-        console.log("El total de productos ahora es " + cantidadItems);
         setTotalProductosCart(cantidadItems);
+    };
+
+    function montoTotalItems () {
+        let montoTotal = 0;
+        productosCart.forEach((producto) => {
+            montoTotal = montoTotal + (producto.qty * producto.price);
+        })
+        setMontoTotalCart(montoTotal);
     };
 
     
     return (
-        <Provider value={{productosCart, addItem, removeItem, clear, totalProductosCart}}>
+        <Provider value={{productosCart, addItem, removeItem, clearCart, totalProductosCart, montoTotalCart}}>
             {children}
         </Provider>       
         );
