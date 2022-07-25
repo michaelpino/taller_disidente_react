@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import ItemDetail from './ItemDetail';
 import { useParams } from 'react-router-dom';
 import SyncLoader  from "react-spinners/SyncLoader";
+import {db} from "../firebase/firebase";
+import { getDoc, collection, doc } from "firebase/firestore";
 
 const override = {
     display: "block",
@@ -17,12 +19,28 @@ export default function ItemDetailContainer( ) {
 
     useEffect(() => {
         setLoading(true);
-        setTimeout( () => {
-            fetch(`https://fakestoreapi.com/products/${id}`)
-            .then(res=>res.json())
-            .then(data=> setProducto(data))
-            .finally(() => setLoading(false))
-        },2000);
+        const querySinFiltrar = collection(db,"productos");
+        const solicitudFirebase = doc(querySinFiltrar, id);
+        getDoc(solicitudFirebase).then(respuesta => {
+            const productoFirebase = {
+                ...respuesta.data(),
+                id: respuesta.id
+            }
+            setProducto(productoFirebase);
+            setLoading(false);
+            console.log(productoFirebase);
+            }
+        )
+        
+        //SECCION QUE OBTIENE DATOS DE PRODUCTOS DESDE UNA APIWEB. NO LA BORRO PARA USARLA A FUTURO
+        // setLoading(true);
+        // setTimeout( () => {
+        //     fetch(`https://fakestoreapi.com/products/${id}`)
+        //     .then(res=>res.json())
+        //     .then(data=> setProducto(data))
+        //     .finally(() => setLoading(false))
+        // },2000);
+        
     },[])
     
     return (
