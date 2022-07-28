@@ -1,22 +1,68 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {cartContext} from "../context/CartContext"; 
+import Form from './Form';
 import { Link } from "react-router-dom";
+import {db} from "../firebase/firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 export default function Cart() {
     
     const {productosCart, totalProductosCart, montoTotalCart, removeItem, clearCart} = useContext(cartContext);
+    const [idVenta, setIdVenta] = useState();
+    const [formVisible, setFormVisible] = useState(false);
+    
+    let datosComprador = {
+        name: "Michael Pino",
+        phone: 56967289741,
+        email: "michael.pino.b@gmail.com"
+    }
+    
+    const finalizarCompra = () => {
+        const ventasCollection = collection(db, "ventas");
+        console.log(productosCart);
+        addDoc(ventasCollection,{
+            buyer: datosComprador,
+            items: productosCart,
+            date: serverTimestamp(),
+            total: montoTotalCart
+        })
+        .then( respuesta => {
+            setIdVenta(respuesta.id);
+            setFormVisible(false);
+            clearCart();
+        });
+    }
+
+    const cambiaVisibilidadForm = () =>{
+        setFormVisible(!formVisible);
+    }
+
+    const obtenerDatosComprador = (datosObtenidos) => {
+        datosComprador.name = datosObtenidos.name;
+        datosComprador.phone = datosObtenidos.phone;
+        datosComprador.email = datosObtenidos.email;
+    }
+    
+    const cerrarCompra = () => {
+        datosComprador = {name:"Jhon Doe", phone:"555-55555", email:"sin@email.com"};
+        setIdVenta();
+    }
+    
     
     return (
         <div className="grid justify-items-center px-32 py-10">
-            <t1 className="text-2xl text-justify text-blue-600">Carrito de compras</t1>
-           {totalProductosCart == 0 ? 
+           {idVenta ? 
+           <></>
+           :
+           totalProductosCart == 0 ? 
            <>
+                <h1 className="text-2xl text-justify text-blue-600">Carrito de compras</h1>
                 <h2 className="py-10"> No hay productos en el carrito </h2> 
                 <Link to={"/"}><button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Volver al inicio</button></Link>
-           </>
-           
-           : 
+            </>
+           :
            <>
+                <h1 className="text-2xl text-justify text-blue-600">Carrito de compras</h1>
                 <table className="min-w-full text-center py-4">
                 
                     <thead className="border-b bg-gray-800">
@@ -28,7 +74,7 @@ export default function Cart() {
                         <th scope="col" className="text-sm font-medium text-white px-6 py-4">Subtotal (USD)</th>
                         <th scope="col" className="text-sm font-medium text-white px-6 py-4"></th>
                         </tr>
-                    </thead>
+                    </thead> 
                     <tbody>
                     {productosCart.map( (producto, index) => 
                         <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100" key={producto.id}>
@@ -49,12 +95,35 @@ export default function Cart() {
                         </tr>
                     </tbody>
                 </table>
-                <div className="py-10">
-                <button onClick={clearCart} className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Vaciar el carrito</button>
+                <div className="flex py-10">
+                    <div className="px-5">
+                        <button onClick={clearCart} className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Vaciar el carrito</button>
+                    </div>
+                    <div className="px-5">
+                        <button onClick={cambiaVisibilidadForm} className="inline-block px-6 py-2 border-2 border-green-600 text-green-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Continuar con la compra</button>
+                    </div>
+                </div>
+            </>     
+            }    
+                <div>
+                        {formVisible ? <Form obtenerDatosComprador={obtenerDatosComprador} finalizarCompra={finalizarCompra}/> : <></>}
+
                 </div>
                 
-            </>       
-            }
+                {idVenta ? 
+                    <div className="grid justify-items-center ">
+                        <h2 className="py-5 text-xl">{`Gracias por tu compra!`}</h2> 
+                        <p className="py-1 text-xl text-blue-500">
+                            {`Tu compra fue ingresada con el ID ${idVenta}`}
+                        </p>
+                        <div className="py-3">
+                        <button onClick={cerrarCompra} className="inline-block px-6 py-2 border-2 border-blue-600 text-black-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Cerrar y volver al inicio</button>
+                        </div>
+                        
+                    </div>
+                    :
+                    <></>
+                }
         </div>
     );
 }

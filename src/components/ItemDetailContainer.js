@@ -28,7 +28,6 @@ export default function ItemDetailContainer( ) {
             }
             setProducto(productoFirebase);
             setLoading(false);
-            console.log(productoFirebase);
             }
         )
         

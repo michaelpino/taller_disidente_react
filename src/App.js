@@ -16,8 +16,8 @@ function App() {
       <CartContext>
         <NavBar/>
         <Routes>
-          <Route path="/" element={<ItemListContainer mensaje="En un futuro me desarrollaré y seré de utilidad" />}/>
-          <Route path="/category/:categoryName" element={<ItemListContainer mensaje="En un futuro me desarrollaré y seré de utilidad" />}/>
+          <Route path="/" element={<ItemListContainer/>}/>
+          <Route path="/category/:categoryName" element={<ItemListContainer />}/>
           <Route path="/item/:id" element={<ItemDetailContainer />}/>
           <Route path="/cart" element={<Cart />}/>
         </Routes>

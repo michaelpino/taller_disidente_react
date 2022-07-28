@@ -11,7 +11,7 @@ const override = {
     borderColor: "red",
   };
 
-export default function ItemListContainer( {mensaje} ) {
+export default function ItemListContainer( {} ) {
     
     const {categoryName} = useParams();
     
@@ -29,7 +29,6 @@ export default function ItemListContainer( {mensaje} ) {
             })
             setProductos(listaProductosFirebase);
             setLoading(false);
-            console.log(listaProductosFirebase);
         });
 
         //SECCION QUE OBTIENE DATOS DE PRODUCTOS DESDE UNA APIWEB. NO LA BORRO PARA USARLA A FUTURO

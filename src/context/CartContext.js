@@ -28,7 +28,6 @@ export default function  CartContext({ children }) {
             const newItem = {...item, qty: quantity};
             setProductosCart(productosCart => [...productosCart,newItem]);
         }
-        console.log(productosCart);
     };
 
     function removeItem (itemId) {
@@ -38,7 +37,6 @@ export default function  CartContext({ children }) {
 
     function clearCart () {
         setProductosCart([]);
-        console.log("borrado todo");
     };
 
     function isInCart (id) {
