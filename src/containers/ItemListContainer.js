@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ItemList from './ItemList';
+import ItemList from '../components/ItemList';
 import { useParams } from 'react-router-dom';
 import HashLoader from "react-spinners/HashLoader";
 import {db} from "../firebase/firebase";
@@ -29,18 +29,7 @@ export default function ItemListContainer( {} ) {
             })
             setProductos(listaProductosFirebase);
             setLoading(false);
-        });
-
-        //SECCION QUE OBTIENE DATOS DE PRODUCTOS DESDE UNA APIWEB. NO LA BORRO PARA USARLA A FUTURO
-        // setLoading(true);
-        // const url = categoryName ? `https://fakestoreapi.com/products/category/${categoryName}` : 'https://fakestoreapi.com/products';
-        // setTimeout( () => {
-        //     fetch(url)
-        //     .then(res=>res.json())
-        //     .then(data=> setProductos(data))
-        //     .finally(() => setLoading(false))
-        // },2000);
-        
+        });        
     },[categoryName])
     
     return (

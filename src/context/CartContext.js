@@ -5,13 +5,18 @@ const { Provider } = cartContext;
 
 export default function  CartContext({ children }) {
 
-    const [productosCart, setProductosCart] = useState([]);
+    let carritoInicial = [];
+    if (!(localStorage.getItem("carritoActual") === null)) {
+        carritoInicial = JSON.parse(localStorage.getItem("carritoActual"));
+    }
+    const [productosCart, setProductosCart] = useState(carritoInicial);
     const [totalProductosCart, setTotalProductosCart] = useState(0);
     const [montoTotalCart, setMontoTotalCart] = useState(0);
 
     useEffect(() => {
         countItems();
         montoTotalItems();
+        localStorage.setItem("carritoActual", JSON.stringify(productosCart));
     },[productosCart])
 
     function addItem (item, quantity) {

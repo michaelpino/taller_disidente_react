@@ -11,11 +11,7 @@ export default function Cart() {
     const [idVenta, setIdVenta] = useState();
     const [formVisible, setFormVisible] = useState(false);
     
-    let datosComprador = {
-        name: "Michael Pino",
-        phone: 56967289741,
-        email: "michael.pino.b@gmail.com"
-    }
+    let datosComprador = {}
     
     const finalizarCompra = () => {
         const ventasCollection = collection(db, "ventas");
@@ -44,7 +40,7 @@ export default function Cart() {
     }
     
     const cerrarCompra = () => {
-        datosComprador = {name:"Jhon Doe", phone:"555-55555", email:"sin@email.com"};
+        datosComprador = {};
         setIdVenta();
     }
     

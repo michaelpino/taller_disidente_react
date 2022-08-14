@@ -13,19 +13,19 @@ export default function Form({obtenerDatosComprador, finalizarCompra}) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2 className="mb-4 text-l font-bold">Para continuar, por favor ingrese sus datos:</h2>
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" for="nombre">
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nombre">
             Nombre y Apellido
         </label>
         <input type="text" id="nombre" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Juan Perez" required {...register("name")} />
       </div>
       <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" for="tel">
+      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tel">
             Teléfono Celular
         </label>
       <input type="text" id="tel" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="+56912345678" required {...register("phone")} />
       </div>
       <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" for="email">
+      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
             E-mail
         </label>
       <input type="email" id="email" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="name@company.com" required {...register("email")} />

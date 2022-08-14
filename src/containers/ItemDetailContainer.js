@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ItemDetail from './ItemDetail';
+import ItemDetail from '../components/ItemDetail';
 import { useParams } from 'react-router-dom';
 import SyncLoader  from "react-spinners/SyncLoader";
 import {db} from "../firebase/firebase";
@@ -29,17 +29,7 @@ export default function ItemDetailContainer( ) {
             setProducto(productoFirebase);
             setLoading(false);
             }
-        )
-        
-        //SECCION QUE OBTIENE DATOS DE PRODUCTOS DESDE UNA APIWEB. NO LA BORRO PARA USARLA A FUTURO
-        // setLoading(true);
-        // setTimeout( () => {
-        //     fetch(`https://fakestoreapi.com/products/${id}`)
-        //     .then(res=>res.json())
-        //     .then(data=> setProducto(data))
-        //     .finally(() => setLoading(false))
-        // },2000);
-        
+        )        
     },[])
     
     return (
