@@ -15,7 +15,6 @@ export default function Cart() {
     
     const finalizarCompra = () => {
         const ventasCollection = collection(db, "ventas");
-        console.log(productosCart);
         addDoc(ventasCollection,{
             buyer: datosComprador,
             items: productosCart,
